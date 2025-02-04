@@ -1,3 +1,3 @@
 module knight
 
-go 1.30
+go 1.23.1
