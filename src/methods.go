@@ -1,20 +1,12 @@
 package main
 
 import (
-	"encoding/json"
 	"math/rand"
 	"sort"
 )
 
 type Board struct {
 	Rows [][]int `json:"board"`
-}
-
-func convertBoardToJSON(board [][]int) ([]byte, error) {
-	data := Board{
-		Rows: board,
-	}
-	return json.Marshal(data)
 }
 
 type Move struct {
