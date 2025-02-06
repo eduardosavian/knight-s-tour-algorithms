@@ -17,7 +17,7 @@ Implement two algorithms for the Knight's Walk:
 #### Go build
 
 ```bash
-go build -o libs/knight_tour src/main.go src/methods.go
+go build -o knight_tour src/main.go src/methods.go
 ```
 
 #### Run executable
