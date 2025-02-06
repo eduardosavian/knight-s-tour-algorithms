@@ -10,6 +10,7 @@ import (
 type PrintOptions struct {
     Time     time.Duration
     Solution bool
+    Count int64
 }
 
 func handleMenu() (int, int, int, string) {
@@ -63,6 +64,8 @@ func printBoard(board [][]int, opts ...PrintOptions) {
         if opt.Time > 0 {
             fmt.Println("Time: ", opt.Time)
         }
+
+        fmt.Println("Count: ", opt.Count)
 
         if opt.Solution {
             fmt.Println("Solution found!")

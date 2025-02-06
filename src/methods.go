@@ -73,6 +73,8 @@ func findNextMoves(x, y, boardSize int, board [][]int, searchType string) []Move
 }
 
 func backtrackSearch(board [][]int, moveNum, x, y, boardSize int, backtrackType string) bool {
+	count++
+
 	board[x][y] = moveNum
 
 	if moveNum == boardSize*boardSize {

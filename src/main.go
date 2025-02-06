@@ -4,6 +4,8 @@ import (
     "time"
 )
 
+var count int64;
+
 func main() {
     boardSize, startX, startY, algorithm := handleMenu()
 
@@ -20,6 +22,7 @@ func main() {
     options     := PrintOptions{
         Time:    time_result ,
         Solution: solution,
+        Count: count,
     }
 
     printBoard(board, options)
