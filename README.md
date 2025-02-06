@@ -8,7 +8,13 @@ Implement two algorithms for the Knight's Walk:
 
 - One algorithm should be trial and error (it should be possible to position the knight in any position on the board);
 
-- Another should be a strategy that minimizes computational performance. Do not use ready-made algorithms such as Warnsdorff. The suggested strategy is to choose the smallest possible move.
+- Another should be a strategy that minimizes computational performance. Do not use ready-made algorithms such as Warnsdorff. The suggested strategy is to choose the smallest possible move;
+
+-Count the execution time;
+
+- Count the number of steps needed;
+
+- Tell whether the solution is closed or open.
 
 ## How to Run
 
@@ -44,10 +50,11 @@ go build -o knights_tour src/main.go src/methods.go src/utils.go
 - **startX**: Starting X-coordinate of the knight.
 - **startY**: Starting Y-coordinate of the knight.
 - **algorithm**: The algorithm to use for the Knight’s tour. Options are:
+
 - `wd` (Warnsdorff)
-- `dp` (depth-first)
 - `hd` (High Degree)
 - `sf` (Shuffle)
+- `dp` (depth-first)
 - `ed` (Edge)
 
 #### Example Command
