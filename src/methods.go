@@ -36,7 +36,7 @@ func findNextMoves(x, y, boardSize int, board [][]int, searchType string) []Move
 	}
 
 	switch searchType {
-	case "warnsdorff":
+	case "wd":
 		for i := range validMoves {
 			move := &validMoves[i]
 			move.Priority = len(findNextMoves(move.X, move.Y, boardSize, board, "default"))
@@ -44,7 +44,7 @@ func findNextMoves(x, y, boardSize int, board [][]int, searchType string) []Move
 		sort.Slice(validMoves, func(i, j int) bool {
 			return validMoves[i].Priority < validMoves[j].Priority
 		})
-	case "highDegree":
+	case "hd":
 		for i := range validMoves {
 			move := &validMoves[i]
 			move.Priority = len(findNextMoves(move.X, move.Y, boardSize, board, "default"))
@@ -52,27 +52,24 @@ func findNextMoves(x, y, boardSize int, board [][]int, searchType string) []Move
 		sort.Slice(validMoves, func(i, j int) bool {
 			return validMoves[i].Priority > validMoves[j].Priority
 		})
-	case "shuffle":
+	case "sf":
 		rand.Shuffle(len(validMoves), func(i, j int) {
 			validMoves[i], validMoves[j] = validMoves[j], validMoves[i]
+		})
+	case "dp":
+		// dp
+	case "ed":
+        for i := range validMoves {
+            move := &validMoves[i]
+
+            move.Priority = (move.X + move.Y) % boardSize
+        }
+        sort.Slice(validMoves, func(i, j int) bool {
+            return validMoves[i].Priority < validMoves[j].Priority
 		})
 	}
 
 	return validMoves
-}
-
-func greedySearch(board [][]int, x, y, boardSize int, searchType string) bool {
-	board[x][y] = 1
-	for moveNum := 2; moveNum <= boardSize*boardSize; moveNum++ {
-		nextMoves := findNextMoves(x, y, boardSize, board, searchType)
-		if len(nextMoves) == 0 {
-			return false
-		}
-		move := nextMoves[0]
-		x, y = move.X, move.Y
-		board[x][y] = moveNum
-	}
-	return true
 }
 
 func backtrackSearch(board [][]int, moveNum, x, y, boardSize int, backtrackType string) bool {
@@ -91,5 +88,6 @@ func backtrackSearch(board [][]int, moveNum, x, y, boardSize int, backtrackType 
 	}
 
 	board[x][y] = 0
+
 	return false
 }

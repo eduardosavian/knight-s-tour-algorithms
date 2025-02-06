@@ -27,7 +27,7 @@ Implement two algorithms for the Knight's Walk:
 3. Run the following command to build the executable:
 
 ```bash
-go build -o knights_tour src/main.go src/methods.go
+go build -o knights_tour src/main.go src/methods.go src/utils.go
 ```
 
 ### Execute
@@ -45,9 +45,10 @@ go build -o knights_tour src/main.go src/methods.go
 - **startY**: Starting Y-coordinate of the knight.
 - **algorithm**: The algorithm to use for the Knight’s tour. Options are:
 - `wd` (Warnsdorff)
-- `bt` (Backtrack)
+- `dp` (depth-first)
 - `hd` (High Degree)
 - `sf` (Shuffle)
+- `ed` (Edge)
 
 #### Example Command
 
