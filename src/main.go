@@ -48,7 +48,7 @@ func main() {
 
 	solution := false
 
-	time_start := time.Now()
+	//time_start := time.Now()
 
 	if (algorithm == "warnsdorff") {
 		solution = greedySearch(board, startX, startY, boardSize, algorithm)
@@ -71,11 +71,11 @@ func main() {
 		}
 	}
 
-	time_end := time.Now()
+	//time_end := time.Now()
 
-	time_result := time_end.Sub(time_start)
+	//time_result := time_end.Sub(time_start)
 
-	fmt.Println(time_result)
+	//fmt.Println(time_result)
 
 	if(!solution) {
 		fmt.Println("No Knight's tour solution found:", err)
