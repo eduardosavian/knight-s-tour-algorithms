@@ -1,6 +1,1 @@
-# PyInstaller generated files and directories
-/build/
-/dist/
-*.spec
-/exec/
-venv/
+knight_tour

@@ -35,11 +35,10 @@ func main() {
 	}
 
 	algorithm := args[4]
-	if algorithm != "warnsdorff" && algorithm != "backtrack" && algorithm != "highDegree" && algorithm != "shuffle" {
-		fmt.Println("Invalid algorithm. Must be either 'warnsdorff', 'backtrack', 'highDegree', or 'shuffle'.")
+	if algorithm != "wd" && algorithm != "bd" && algorithm != "hd" && algorithm != "sf" {
+		fmt.Println("Invalid algorithm. Must be either 'wd'(warnsdorff), 'bd'(backtrack), 'hd'(highDegree), or 'sf'(shuffle).")
 		return
 	}
-
 
     board := make([][]int, boardSize)
 	for i := range board {
@@ -48,13 +47,13 @@ func main() {
 
 	solution := false
 
-	//time_start := time.Now()
+	time_start := time.Now()
 
-	if (algorithm == "warnsdorff") {
+	if (algorithm == "wd") {
 		solution = greedySearch(board, startX, startY, boardSize, algorithm)
 	}
 
-	if(algorithm == "backtrack" || algorithm == "highDegree" || algorithm == "shuffle") {
+	if(algorithm == "bt" || algorithm == "hd" || algorithm == "sf") {
 		resultChan := make(chan bool)
 		ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 		defer cancel()
@@ -71,11 +70,11 @@ func main() {
 		}
 	}
 
-	//time_end := time.Now()
+	time_end := time.Now()
 
-	//time_result := time_end.Sub(time_start)
+	time_result := time_end.Sub(time_start)
 
-	//fmt.Println(time_result)
+	fmt.Println(time_result)
 
 	if(!solution) {
 		fmt.Println("No Knight's tour solution found:", err)
