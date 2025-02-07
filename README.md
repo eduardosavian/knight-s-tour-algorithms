@@ -10,7 +10,7 @@ Implement two algorithms for the Knight's Walk:
 
 - Another should be a strategy that minimizes computational performance. Do not use ready-made algorithms such as Warnsdorff. The suggested strategy is to choose the smallest possible move;
 
--Count the execution time;
+- Count the execution time;
 
 - Count the number of steps needed;
 
