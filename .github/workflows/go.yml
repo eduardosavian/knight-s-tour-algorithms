@@ -19,9 +19,6 @@ jobs:
       with:
         go-version: '1.23.1'
 
-    #- name: Test
-      #run: cd src/ && go test && cd ..
-
     - name: Build
       run: go build -o knights_tour src/main.go src/methods.go src/utils.go
 
