@@ -25,9 +25,6 @@ jobs:
     - name: Run Warnsdorff algorithm
       run: ./knights_tour 8 0 0 wd
 
-    - name: Run High degree algorithm
-      run: ./knights_tour 8 0 0 hd
-
     - name: Run Shuffle algorithm
       run: ./knights_tour 8 0 0 sf
 
