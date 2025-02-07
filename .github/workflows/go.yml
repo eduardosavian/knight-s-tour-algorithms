@@ -9,7 +9,8 @@ on:
 jobs:
 
   build:
-    runs-on: alpine
+    runs-on: alpine-latest
+
     steps:
     - uses: actions/checkout@v4
 
