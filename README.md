@@ -66,6 +66,8 @@ cd src/ && go test && cd ..
 ./knights_tour <boardSize> <startX> <startY> <algorithm>
 ```
 
+#### Example Command
+
 - **boardSize**: Size of the chessboard (e.g., 8 for an 8x8 board, max 30).
 - **startX**: Starting X-coordinate of the knight.
 - **startY**: Starting Y-coordinate of the knight.
@@ -76,8 +78,6 @@ cd src/ && go test && cd ..
 - `sf` (Shuffle)
 - `dp` (depth-first)
 - `ed` (Edge)
-
-#### Example Command
 
 ```bash
 ./knights_tour 8 0 0 wd
