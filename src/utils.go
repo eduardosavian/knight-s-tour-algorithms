@@ -64,7 +64,7 @@ func printBoard(board [][]int, opts ...PrintOptions) {
         fmt.Println(opt.Time)
         if opt.Time > 0 {
             fmt.Printf("Time: %v (%.9f segundos | %d nanosegundos)\n", opt.Time, opt.Time.Seconds(), opt.Time.Nanoseconds())
-            }        
+            }
 
         fmt.Println("Count: ", opt.Count)
 
