@@ -16,8 +16,7 @@ func main() {
 
     time_start  := time.Now()
     solution    := backtrackSearch(board, 1, startX, startY, boardSize, algorithm)
-    time_end    := time.Now()
-    time_result := time_end.Sub(time_start)
+    time_result := time.Since(time_start)
 
     options     := PrintOptions{
         Time:    time_result ,
