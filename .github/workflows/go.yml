@@ -19,4 +19,7 @@ jobs:
         go-version: '1.23.1'
 
     - name: Build
-      run: cd src/ && go run main.go methods.go 1 1 8 warnsdorff
+      run: go build -o knights_tour src/main.go src/methods.go src/utils.go
+
+    - name: Run
+      run: ./knights_tour 16 0 0 wd
