@@ -66,7 +66,7 @@ cd src/ && go test && cd ..
 ./knights_tour <boardSize> <startX> <startY> <algorithm>
 ```
 
-- **boardSize**: Size of the chessboard (e.g., 8 for an 8x8 board).
+- **boardSize**: Size of the chessboard (e.g., 8 for an 8x8 board, max 30).
 - **startX**: Starting X-coordinate of the knight.
 - **startY**: Starting Y-coordinate of the knight.
 - **algorithm**: The algorithm to use for the Knight’s tour. Options are:
