@@ -25,11 +25,8 @@ jobs:
     - name: Run Warnsdorff algorithm
       run: ./knights_tour 8 0 0 wd
 
-    - name: Run Shuffle algorithm
-      run: ./knights_tour 8 0 0 sf
+    - name: Run Edge algorithm
+      run: ./knights_tour 8 0 0 ed
 
     - name: Run Depth-first algorithm
       run: ./knights_tour 8 0 0 dp
-
-    - name: Run Edge algorithm
-      run: ./knights_tour 8 0 0 ed
