@@ -24,16 +24,28 @@ Implement two algorithms for the Knight's Walk:
 
 ### Build
 
-#### Linux
-
 1. Open your terminal.
 
 2. Navigate to the project directory where the source files are located.
 
 3. Run the following command to build the executable:
 
+#### Linux
+
 ```bash
 go build -o knights_tour src/main.go src/methods.go src/utils.go
+```
+
+#### Windows
+
+```ps1
+go build -o knights_tour.exe src/main.go src/methods.go src/utils.go
+```
+
+### Test
+
+```bash
+cd src/ && go test && cd ..
 ```
 
 ### Execute
@@ -41,6 +53,14 @@ go build -o knights_tour src/main.go src/methods.go src/utils.go
 1. Once the build is complete, you can run the executable.
 
 2. Use the following command to run the program:
+
+#### Linux
+
+```ps1
+./knights_tour <boardSize> <startX> <startY> <algorithm>
+```
+
+#### Windows
 
 ```bash
 ./knights_tour <boardSize> <startX> <startY> <algorithm>
