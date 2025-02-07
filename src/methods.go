@@ -61,17 +61,17 @@ func findNextMoves(x, y, boardSize int, board [][]int, searchType string) []Move
 	case "ed":
 		for i := range validMoves {
 			move := &validMoves[i]
-	
+
 			distX := min(move.X, boardSize-1-move.X)
 			distY := min(move.Y, boardSize-1-move.Y)
-			
+
 			move.Priority = distX + distY
 		}
-	
+
 		sort.Slice(validMoves, func(i, j int) bool {
 			return validMoves[i].Priority < validMoves[j].Priority
 		})
-	
+
 	}
 	return validMoves
 }
