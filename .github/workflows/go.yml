@@ -1,0 +1,32 @@
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.23.1'
+
+    - name: Build
+      run: go build -o knights_tour src/main.go src/methods.go src/utils.go
+
+    - name: Run Warnsdorff algorithm
+      run: ./knights_tour 8 0 0 wd
+
+    - name: Run Edge algorithm
+      run: ./knights_tour 8 0 0 ed
+
+    - name: Run Depth-first algorithm
+      run: ./knights_tour 8 0 0 dp
