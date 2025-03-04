@@ -21,6 +21,3 @@ jobs:
 
     - name: CD
       run: cd src/
-
-    - name: Build
-      run: go build -o knights_tour
