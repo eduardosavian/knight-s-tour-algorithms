@@ -6,21 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type knight struct {
-    Algorithm   string  `json:"algorithm"`
-    Size        int     `json:"size"`
-    StartX      int     `json:"startX"`
-    StartY      int     `json:"startY"`
-}
-
-
-var testss = []knight {
-    {"wd", 8, 0, 0},
-}
 
 var count = 0
 
 func main() {
+    router := gin.Default()
+
     // boardSize, startX, startY, algorithm := handleMenu()
 
     // board := make([][]int, boardSize)
