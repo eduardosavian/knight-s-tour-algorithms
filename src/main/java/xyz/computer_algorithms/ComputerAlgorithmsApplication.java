@@ -9,5 +9,4 @@ public class ComputerAlgorithmsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ComputerAlgorithmsApplication.class, args);
 	}
-
 }

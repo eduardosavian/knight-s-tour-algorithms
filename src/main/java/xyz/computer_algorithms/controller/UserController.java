@@ -30,9 +30,21 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
     }
 
-    @PostMapping
-    public ResponseEntity<User> create(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+
+    @PostMapping("/users")
+    public ResponseEntity<String> createUser(@RequestBody User user) {
+        try {
+            return ResponseEntity.ok("User created successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("An internal error occurred.");
+        }
+    }
+
+    @ExceptionHandler(value = {RuntimeException.class})
+    public ResponseEntity<Object> handleRuntimeException(RuntimeException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping
