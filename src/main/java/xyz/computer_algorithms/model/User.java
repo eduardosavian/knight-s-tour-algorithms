@@ -1,5 +1,9 @@
 package xyz.computer_algorithms.model;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,4 +26,7 @@ public class User {
     private String firstName;
 
     private String lastName;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
