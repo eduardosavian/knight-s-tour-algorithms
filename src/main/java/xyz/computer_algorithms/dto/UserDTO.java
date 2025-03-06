@@ -1,4 +1,4 @@
-package xyz.computer_algorithms.DTO;
+package xyz.computer_algorithms.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

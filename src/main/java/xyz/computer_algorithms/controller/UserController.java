@@ -1,5 +1,6 @@
 package xyz.computer_algorithms.controller;
 
+import xyz.computer_algorithms.dto.UserDTO;
 import xyz.computer_algorithms.model.User;
 import xyz.computer_algorithms.service.UserService;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/users")
@@ -21,24 +23,35 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<User> users = userService.findAll();
+        List<UserDTO> userDTOs = users.stream()
+                .map(userService::getUserDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(userDTOs);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
+    public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
+        Optional<User> userOptional = userService.findById(id);
+        if (userOptional.isPresent()) {
+            UserDTO userDTO = userService.getUserDTO(userOptional.get());
+            return ResponseEntity.status(HttpStatus.OK).body(userDTO);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-
     @PostMapping("/create")
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
         try {
-            return ResponseEntity.ok("User created successfully");
+            User createdUser = userService.save(user);
+            UserDTO createdUserDTO = userService.getUserDTO(createdUser);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdUserDTO);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(null); // or a custom error DTO
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("An internal error occurred.");
+            return ResponseEntity.internalServerError().body(null); // or a custom error DTO
         }
     }
 
@@ -48,13 +61,15 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<User> update(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
+    public ResponseEntity<UserDTO> update(@RequestBody User user) {
+        User updatedUser = userService.update(user);
+        UserDTO updatedUserDTO = userService.getUserDTO(updatedUser);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUserDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

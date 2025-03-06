@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import xyz.computer_algorithms.DTO.KnightsTourDTO;
+import xyz.computer_algorithms.dto.KnightsTourDTO;
 import xyz.computer_algorithms.model.KnightsTour;
 import xyz.computer_algorithms.service.KnightsTourService;
 
