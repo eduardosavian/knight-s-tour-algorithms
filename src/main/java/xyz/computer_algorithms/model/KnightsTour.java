@@ -27,10 +27,6 @@ public class KnightsTour {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "requisition_id")
-    private Requisition requisition;
-
     @Column(name = "algorithm", nullable = false, length = 2)
     private String algorithm;
 

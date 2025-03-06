@@ -20,7 +20,6 @@ CREATE TABLE requesitions (
 CREATE TABLE knights_tour (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    requisition_id INTEGER REFERENCES requesitions(id),
     "algorithm" VARCHAR(2) NOT NULL,
     boardSize INTEGER NOT NULL,
     start_x INTEGER NOT NULL,
