@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import xyz.computer_algorithms.model.KnightsTour;
 import xyz.computer_algorithms.repository.KnightsTourRepository;
 
+@RequiredArgsConstructor
 @Service
 public class KnightsTourServiceImpl implements KnightsTourService {
-    @Autowired
-    private KnightsTourRepository knightsTourRepository;
+    private final KnightsTourRepository knightsTourRepository;
 
     @Override
     public KnightsTour save(KnightsTour knightsTour) {
