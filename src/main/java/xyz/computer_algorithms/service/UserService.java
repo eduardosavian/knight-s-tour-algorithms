@@ -1,6 +1,5 @@
 package xyz.computer_algorithms.service;
 
-import xyz.computer_algorithms.dto.UserDTO;
 import xyz.computer_algorithms.model.User;
 
 import java.util.List;
@@ -22,6 +21,4 @@ public interface UserService {
     User update(User user);
 
     void deleteById(Long id);
-
-    public UserDTO getUserDTO(User user);
 }

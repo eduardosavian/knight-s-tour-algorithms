@@ -1,9 +1,7 @@
 package xyz.computer_algorithms.service;
 
-import xyz.computer_algorithms.dto.UserDTO;
 import xyz.computer_algorithms.model.User;
 import xyz.computer_algorithms.repository.UserRepository;
-import xyz.computer_algorithms.mapper.UserMapper;
 
 
 import java.util.List;
@@ -20,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
     @Transactional
     @Override
@@ -46,10 +43,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
-    }
-
-    @Override
-    public UserDTO getUserDTO(User user) {
-        return userMapper.userToUserDto(user);
     }
 }
