@@ -39,7 +39,7 @@ public class RequisitionController {
 
 
     @PostMapping("")
-    public ResponseEntity<String> createUser(@RequestBody Requisition user) {
+    public ResponseEntity<String> createRequisition(@RequestBody Requisition requisition) {
         try {
             return ResponseEntity.ok("Requisition created successfully");
         } catch (IllegalArgumentException e) {
@@ -55,8 +55,8 @@ public class RequisitionController {
     }
 
     @PutMapping
-    public ResponseEntity<Requisition> update(@RequestBody Requisition user) {
-        return ResponseEntity.status(HttpStatus.OK).body(requisitonService.update(user));
+    public ResponseEntity<Requisition> update(@RequestBody Requisition requisition) {
+        return ResponseEntity.status(HttpStatus.OK).body(requisitonService.update(requisition));
     }
 
     @DeleteMapping("/{id}")

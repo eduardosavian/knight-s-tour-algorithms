@@ -38,7 +38,7 @@ public class KnightsTourController {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> createUser(@RequestBody KnightsTour user) {
+    public ResponseEntity<String> createKnightsTour(@RequestBody KnightsTour knightsTour) {
         try {
             return ResponseEntity.ok("KnightsTour created successfully");
         } catch (IllegalArgumentException e) {
@@ -54,8 +54,8 @@ public class KnightsTourController {
     }
 
     @PutMapping
-    public ResponseEntity<KnightsTour> update(@RequestBody KnightsTour user) {
-        return ResponseEntity.status(HttpStatus.OK).body(knightsTourService.update(user));
+    public ResponseEntity<KnightsTour> update(@RequestBody KnightsTour knightsTour) {
+        return ResponseEntity.status(HttpStatus.OK).body(knightsTourService.update(knightsTour));
     }
 
     @DeleteMapping("/{id}")
