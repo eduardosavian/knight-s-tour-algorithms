@@ -5,8 +5,10 @@ import xyz.computer_algorithms.model.User;
 import java.util.List;
 import java.util.Optional;
 
-public interface UserService {
+import org.springframework.stereotype.Service;
 
+@Service
+public interface UserService {
     User save(User user);
 
     List<User> findAll();

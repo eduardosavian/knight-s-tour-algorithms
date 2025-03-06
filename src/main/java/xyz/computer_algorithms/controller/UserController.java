@@ -31,7 +31,7 @@ public class UserController {
     }
 
 
-    @PostMapping("/users")
+    @PostMapping("")
     public ResponseEntity<String> createUser(@RequestBody User user) {
         try {
             return ResponseEntity.ok("User created successfully");
