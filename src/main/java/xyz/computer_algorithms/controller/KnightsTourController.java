@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.Valid;
+import xyz.computer_algorithms.DTO.KnightsTourDTO;
 import xyz.computer_algorithms.model.KnightsTour;
 import xyz.computer_algorithms.service.KnightsTourService;
 
@@ -37,10 +40,41 @@ public class KnightsTourController {
         return ResponseEntity.status(HttpStatus.OK).body(knightsTourService.findById(id));
     }
 
-    @PostMapping("")
-    public ResponseEntity<String> createKnightsTour(@RequestBody KnightsTour knightsTour) {
+    @PostMapping("/solve")
+    public ResponseEntity<?> createAndSolveKnightsTour(@Valid @RequestBody KnightsTourDTO requestDTO) {
         try {
-            return ResponseEntity.ok("KnightsTour created successfully");
+            int[][] solution = knightsTourService.createAndSolveKnightsTour(
+                    requestDTO.getBoardSize(),
+                    requestDTO.getStartX(),
+                    requestDTO.getStartY(),
+                    requestDTO.getBacktrackType()
+            );
+
+            if (solution == null) {
+                return ((BodyBuilder) ResponseEntity.notFound()).body("No solution found.");
+            }
+
+            return ResponseEntity.ok(solution);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("An internal error occurred.");
+        }
+    }
+
+    @PostMapping("/s")
+    public ResponseEntity<?> solveKnightsTour(@Valid @RequestBody KnightsTourDTO requestDTO) {
+        try {
+            int[][] solution = knightsTourService.solveKnightsTour(
+                    requestDTO.getBoardSize(),
+                    requestDTO.getStartX(),
+                    requestDTO.getStartY(),
+                    requestDTO.getBacktrackType()
+            );
+            if (solution == null) {
+                return ((BodyBuilder) ResponseEntity.notFound()).body("No solution found.");
+            }
+            return ResponseEntity.ok(solution);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

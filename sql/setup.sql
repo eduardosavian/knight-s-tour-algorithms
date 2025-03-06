@@ -24,6 +24,6 @@ CREATE TABLE knights_tour (
     boardSize INTEGER NOT NULL,
     start_x INTEGER NOT NULL,
     start_y INTEGER NOT NULL,
-    steps INTEGER NOT NULL,
+    steps INTEGER,
 	created_at TIMESTAMP DEFAULT NOW()
 );

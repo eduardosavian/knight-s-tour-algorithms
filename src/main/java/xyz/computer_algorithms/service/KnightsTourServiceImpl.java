@@ -1,5 +1,6 @@
 package xyz.computer_algorithms.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +42,18 @@ public class KnightsTourServiceImpl implements KnightsTourService {
 
     @Override
     public int[][] solveKnightsTour(int boardSize, int startX, int startY, String backtrackType) {
+        return KnightsTour.solveKnightsTour(boardSize, startX, startY, backtrackType);
+    }
+
+    public int[][] createAndSolveKnightsTour(int boardSize, int startX, int startY, String backtrackType) {
+        KnightsTour kt = new KnightsTour();
+        kt.setBoardSize((long) boardSize);
+        kt.setStartX((long) startX);
+        kt.setStartY((long) startY);
+        kt.setAlgorithm(backtrackType);
+        kt.setCreatedAt(LocalDateTime.now());
+        knightsTourRepository.save(kt);
+
         return KnightsTour.solveKnightsTour(boardSize, startX, startY, backtrackType);
     }
 }

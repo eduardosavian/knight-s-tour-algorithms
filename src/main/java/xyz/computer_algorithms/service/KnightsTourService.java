@@ -20,4 +20,6 @@ public interface KnightsTourService {
     void deleteById(Long id);
 
     public int[][] solveKnightsTour(int boardSize, int startX, int startY, String backtrackType);
+
+    public int[][] createAndSolveKnightsTour(int boardSize, int startX, int startY, String backtrackType);
 }

@@ -7,8 +7,11 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public interface UserService {
+    @Transactional
     User save(User user);
 
     List<User> findAll();
