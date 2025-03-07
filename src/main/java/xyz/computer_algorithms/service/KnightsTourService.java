@@ -18,4 +18,6 @@ public interface KnightsTourService {
     KnightsTour update(KnightsTour knightsTour);
 
     void deleteById(Long id);
+
+    
 }
