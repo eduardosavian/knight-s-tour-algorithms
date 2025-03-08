@@ -1,18 +1,20 @@
 package xyz.computer_algorithms.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import xyz.computer_algorithms.dto.UserCreationDTO;
+import xyz.computer_algorithms.dto.UserDTO;
 import xyz.computer_algorithms.model.User;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(target = "fullName", expression = "java(user.getFirstName() + \" \" + user.getLastName())")
-    UserDto userToUserDto(User user);
+    User userCreationDTOToUser(UserCreationDTO userCreationDTO);
 
-    User userDtoToUser(UserDto userDto);
+    User userDTOToUser(UserDTO userDTO);
+
+    UserDTO userToUserDTO(User user);
 }

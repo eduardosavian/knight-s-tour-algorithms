@@ -1,5 +1,7 @@
 package xyz.computer_algorithms.service;
 
+import xyz.computer_algorithms.dto.UserCreationDTO;
+import xyz.computer_algorithms.mapper.UserMapper;
 import xyz.computer_algorithms.model.User;
 import xyz.computer_algorithms.repository.UserRepository;
 
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    private final UserMapper userMapper;
 
     @Transactional
     @Override
@@ -44,4 +48,10 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
+    public User createUser(UserCreationDTO userCreationDTO) {
+        User user = userMapper.userCreationDTOToUser(userCreationDTO);
+        return userRepository.save(user);
+    }
+
 }

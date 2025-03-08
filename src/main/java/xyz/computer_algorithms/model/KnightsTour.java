@@ -43,14 +43,14 @@ public class KnightsTour {
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
-    private static final Long[][] POSSIBLE_MOVES = {
-        {-2L, -1L}, {-1L, -2L}, {1L, -2L}, {2L, -1L},
-        {2L, 1L}, {1L, 2L}, {-1L, 2L}, {-2L, 1L}
-    };
+    // private static final Long[][] POSSIBLE_MOVES = {
+    //     {-2L, -1L}, {-1L, -2L}, {1L, -2L}, {2L, -1L},
+    //     {2L, 1L}, {1L, 2L}, {-1L, 2L}, {-2L, 1L}
+    // };
 
 
-    private static boolean isMoveValid(Long x, Long y, Long boardSize) {
-        return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
-    }
+    // private static boolean isMoveValid(Long x, Long y, Long boardSize) {
+    //     return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
+    // }
 
 }

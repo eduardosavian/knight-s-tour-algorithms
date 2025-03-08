@@ -14,5 +14,4 @@ public class UserCreationDTO {
     private String firstName;
 
     private String lastName;
-
 }
