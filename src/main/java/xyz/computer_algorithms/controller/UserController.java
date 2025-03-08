@@ -27,11 +27,10 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserCreationDTO userCreationDTO) {
         try {
-            User user = userMapper.userCreationDTOToUser(userCreationDTO); // Correct mapping
+            User user = userMapper.userCreationDTOToUser(userCreationDTO);
             User createdUser = userService.save(user);
 
-            // Map the created User to UserDTO for the response
-            UserDTO userDTO = userMapper.userToUserDTO(createdUser); // You need to add this method to the mapper
+            UserDTO userDTO = userMapper.userToUserDTO(createdUser);
             return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
 
         } catch (IllegalArgumentException e) {

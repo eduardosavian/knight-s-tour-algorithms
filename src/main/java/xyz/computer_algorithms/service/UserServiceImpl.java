@@ -11,19 +11,15 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-
     private final UserRepository userRepository;
-
     private final UserMapper userMapper;
 
-    @Transactional
     @Override
     public User save(User user) {
         return userRepository.save(user);
