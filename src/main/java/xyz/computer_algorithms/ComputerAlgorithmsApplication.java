@@ -12,9 +12,6 @@ public class ComputerAlgorithmsApplication {
 
         dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
 
-        String serverPort = dotenv.get("SERVER_PORT");
-        System.out.println("SERVER_PORT from .env: " + serverPort);
-
         SpringApplication.run(ComputerAlgorithmsApplication.class, args);
     }
 }
