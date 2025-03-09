@@ -37,10 +37,10 @@ services:
     image: redis/redisinsight
     container_name: algorithms-redis-insight
     ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
+      - "${REDISINSIGHT_PORT}:${REDISINSIGHT_PORT}"
     environment:
-      SERVER_HOST: ${SERVER_HOST}
-      SERVER_PORT: ${SERVER_PORT}
+      SERVER_HOST: ${REDISINSIGHT_PORT}
+      SERVER_PORT: ${REDISINSIGHT_PORT}
     restart: always
 
 volumes:
