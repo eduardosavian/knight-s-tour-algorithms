@@ -5,10 +5,11 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PW}
+      POSTGRES_PORT: ${POSTGRE_PORT}
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "${POSTGRE_PORT}:${POSTGRE_PORT}"
     restart: always
 
   pgadmin:
@@ -20,9 +21,29 @@ services:
     volumes:
       - pgadmindata:/var/lib/pgadmin
     ports:
-      - "5050:80"
+      - "${PGADMIN_PORT}:${PGADMIN_PORT}"
+    restart: always
+
+  redis:
+    image: redis
+    container_name: algorithms-redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - redisdata:/data
+    restart: always
+
+  server:
+    image: redis/redisinsight
+    container_name: algorithms-redis-insight
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      SERVER_HOST: ${SERVER_HOST}
+      SERVER_PORT: ${SERVER_PORT}
     restart: always
 
 volumes:
   pgdata:
   pgadmindata:
+  redisdata:
