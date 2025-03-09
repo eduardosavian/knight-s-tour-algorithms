@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres
-    container_name: algorithms-postgres
+    container_name: computer-algorithms-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PW}
@@ -14,7 +14,7 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: algorithms-pgadmin
+    container_name: computer-algorithms-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_MAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PW}
@@ -26,7 +26,7 @@ services:
 
   redis:
     image: redis
-    container_name: algorithms-redis
+    container_name: computer-algorithms-redis
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
     volumes:
@@ -35,12 +35,9 @@ services:
 
   server:
     image: redis/redisinsight
-    container_name: algorithms-redis-insight
+    container_name: computer-algorithms-redis-insight
     ports:
       - "${REDISINSIGHT_PORT}:${REDISINSIGHT_PORT}"
-    environment:
-      SERVER_HOST: ${REDISINSIGHT_PORT}
-      SERVER_PORT: ${REDISINSIGHT_PORT}
     restart: always
 
 volumes:
