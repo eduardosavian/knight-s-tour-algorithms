@@ -20,12 +20,12 @@ jobs:
             sudo apt-get install docker-compose-plugin -y
           )
 
-      - name: Start PostgreSQL
-        run: docker compose up -d postgres
+      - name: Start compose
+        run: docker compose up
 
       - name: Run Integration Tests
-        run: mvn integration-test -Dspring.datasource.url=jdbc:postgresql://localhost:5432/postgres -Dspring.datasource.username=${{ secrets.POSTGRES_USER }} -Dspring.datasource.password=${{ secrets.POSTGRES_PW }}
+        run: mvn integration-test
 
-      - name: Stop PostgreSQL
+      - name: Stop compose
         if: always()
         run: docker compose down
