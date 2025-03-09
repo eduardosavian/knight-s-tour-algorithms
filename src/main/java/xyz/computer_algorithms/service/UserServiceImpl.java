@@ -1,19 +1,24 @@
 package xyz.computer_algorithms.service;
 
+import xyz.computer_algorithms.dto.UserCreationDTO;
+import xyz.computer_algorithms.mapper.UserMapper;
 import xyz.computer_algorithms.model.User;
 import xyz.computer_algorithms.repository.UserRepository;
+
 
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
-public class UserServiceImpl implements UserService {
+import lombok.RequiredArgsConstructor;
 
-    @Autowired
-    private UserRepository userRepository;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     @Override
     public User save(User user) {
@@ -39,4 +44,10 @@ public class UserServiceImpl implements UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
+    public User createUser(UserCreationDTO userCreationDTO) {
+        User user = userMapper.userCreationDTOToUser(userCreationDTO);
+        return userRepository.save(user);
+    }
+
 }

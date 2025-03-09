@@ -20,11 +20,10 @@ CREATE TABLE requesitions (
 CREATE TABLE knights_tour (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id),
-    post_id INTEGER REFERENCES posts(id),
     "algorithm" VARCHAR(2) NOT NULL,
     boardSize INTEGER NOT NULL,
     start_x INTEGER NOT NULL,
     start_y INTEGER NOT NULL,
-    steps INTEGER NOT NULL,
+    steps INTEGER,
 	created_at TIMESTAMP DEFAULT NOW()
 );

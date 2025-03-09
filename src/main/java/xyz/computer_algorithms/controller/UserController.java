@@ -1,60 +1,69 @@
 package xyz.computer_algorithms.controller;
 
-import xyz.computer_algorithms.model.User;
-import xyz.computer_algorithms.service.UserService;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
+import xyz.computer_algorithms.dto.UserCreationDTO;
+import xyz.computer_algorithms.dto.UserDTO;
+import xyz.computer_algorithms.mapper.UserMapper;
+import xyz.computer_algorithms.model.User;
+import xyz.computer_algorithms.service.UserService;
 
 @RestController
 @RequestMapping("api/users")
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
-    @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    @PostMapping
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserCreationDTO userCreationDTO) {
+        User user = userMapper.userCreationDTOToUser(userCreationDTO);
+        User createdUser = userService.save(user);
+        UserDTO userDTO = userMapper.userToUserDTO(createdUser);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> findById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
-    }
-
-
-    @PostMapping("/users")
-    public ResponseEntity<String> createUser(@RequestBody User user) {
-        try {
-            return ResponseEntity.ok("User created successfully");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("An internal error occurred.");
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+        if (ex.getMessage().contains("uk6dotkott2kjsp8vw4d0m25fb7")) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Email address already in use.");
+        } else if (ex.getMessage().contains("ukr43af9ap4edm43mmtq01oddj6")) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("Username already in use.");
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An unexpected database error occurred.");
         }
     }
 
     @ExceptionHandler(value = {RuntimeException.class})
-    public ResponseEntity<Object> handleRuntimeException(RuntimeException ex){
+    public ResponseEntity<Object> handleRuntimeException(RuntimeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PutMapping
-    public ResponseEntity<User> update(@RequestBody User user) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<User> users = userService.findAll();
+        List<UserDTO> userDTOs = users.stream()
+                .map(userMapper::userToUserDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        userService.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
 }
