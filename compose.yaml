@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres
+    image: postgres:17.4-alpine3.21
     container_name: computer-algorithms-postgres
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -9,11 +9,11 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "${POSTGRE_PORT}:${POSTGRE_PORT}"
+      - "${POSTGRE_PORT}:5432"
     restart: always
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     container_name: computer-algorithms-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_MAIL}
@@ -21,11 +21,11 @@ services:
     volumes:
       - pgadmindata:/var/lib/pgadmin
     ports:
-      - "${PGADMIN_PORT}:${PGADMIN_PORT}"
+      - "${PGADMIN_PORT}:80"
     restart: always
 
   redis:
-    image: redis
+    image: redis:7.4.2-alpine
     container_name: computer-algorithms-redis
     ports:
       - "${REDIS_PORT}:${REDIS_PORT}"
@@ -34,7 +34,7 @@ services:
     restart: always
 
   server:
-    image: redis/redisinsight
+    image: redis/redisinsight:latest
     container_name: computer-algorithms-redis-insight
     ports:
       - "${REDISINSIGHT_PORT}:${REDISINSIGHT_PORT}"
